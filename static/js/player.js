@@ -1,24 +1,23 @@
 $(function() {
   var mainGroup = $('#main-group'),
-      player = $('.player'),
-      gridUnit = 30;
+      player = $('.player');
 
-  $(document).keydown(function(e){
-    switch(e.which) {
-      case 37:
+  var playerController = {
+      left: function() {
         player.attr('x', +player.attr('x') - gridUnit);
-        break;
-      case 38:
-        player.attr('y', +player.attr('y') - gridUnit);
-        break
-      case 39:
+      },
+      right: function() {
         player.attr('x', +player.attr('x') + gridUnit);
-        break;
-      case 40:
+      },
+      up: function() {
+        player.attr('y', +player.attr('y') - gridUnit);
+      },
+      down: function() {
         player.attr('y', +player.attr('y') + gridUnit);
-        break
-    }
-  });
+      }
+  };
+  
+  keyController = playerController;
 
   function zoom(direction, amount) {
     console.log(transform)

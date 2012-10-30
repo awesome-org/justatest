@@ -10,7 +10,7 @@ app.configure(function () {
 });
 
 app.get('/', function(req, res){
-  res.send('games \'n glpyhs!');
+  res.render('index');
 });
 
 app.get('/author', function(req, res) {

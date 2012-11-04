@@ -16,11 +16,10 @@ $(function() {
         player.attr('y', +player.attr('y') + gridUnit);
       }
   };
-  
+
   keyController = playerController;
 
   function zoom(direction, amount) {
-    console.log(transform)
     if (direction === 'out') {
       mainGroup.attr('transform', 'translate(' + (transform[0]) + ',' +(transform[1]) +') scale(' + (+transform[2] - amount) + ',' + (+transform[3] - amount) +')' );
     } else {

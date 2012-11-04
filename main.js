@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-var nounProject = require('nounproject');
+var nounProject = require('./nounproject');
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');

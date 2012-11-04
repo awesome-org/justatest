@@ -27,3 +27,25 @@ function setupInput() {
         }
     });
 }
+
+function glyphify(svgObj,backgroundColor,foregroundColor) {
+    // NB: getBBox will return a 0x0 bbox unless svgObj is already added to the DOM.
+    var boundingRect = svgObj.getBBox();
+    var largerAxis = boundingRect.width > boundingRect.height ? 'width' : 'height';
+    var smallerAxis = largerAxis == 'height' ? 'width' : 'height';
+    var largerAxisLength = parseInt(Math.max(1,boundingRect[largerAxis]/boundingRect[smallerAxis])) * gridUnit;
+    $(svgObj).attr(largerAxis, largerAxisLength.toString() + 'px');
+    $(svgObj).attr(smallerAxis, gridUnit.toString() + 'px');
+}
+
+
+// TODO: Remove this. It's just a testing function that exists until glyphify
+// is integrated into the glyph chooser. 
+function testGlyphify(svgCode) {
+    var newTiger = $(svgCode);
+    newTiger.attr('x',120);
+    newTiger.attr('y',120);
+    $('#editor').append(newTiger);
+    glyphify(newTiger.get()[0]);
+    return newTiger.get()[0];
+}

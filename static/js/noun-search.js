@@ -30,12 +30,10 @@ function NounSearchCtrl($scope, $element, $http) {
   };
 
   $scope.handleKeypress = function(key, event) {
-    if (typeof $scope.selectedGlyphIndex == 'undefined') return;
+    if (!typeof $scope.selectedGlyphIndex == 'number') return;
     switch(key) {
       case 13: //enter
-        if (typeof $scope.selectedGlyphIndex !== 'undefined') { // if we're selecting nouns, not naming them
-          $scope.placeGlyph($scope.glyphs[$scope.selectedGlyphIndex]);
-        }
+        $scope.placeGlyph($scope.glyphs[$scope.selectedGlyphIndex]);
         break;
       case 38: //up
         if ($scope.selectedGlyphIndex > 0) {

@@ -33,7 +33,7 @@ function NounSearchCtrl($scope, $element, $http) {
     if (typeof $scope.selectedGlyphIndex == 'undefined') return;
     switch(key) {
       case 13: //enter
-        if ($scope.selectedGlyphIndex > 0) { // if we're selecting nouns, not naming them
+        if (typeof $scope.selectedGlyphIndex !== 'undefined') { // if we're selecting nouns, not naming them
           $scope.placeGlyph($scope.glyphs[$scope.selectedGlyphIndex]);
         }
         break;

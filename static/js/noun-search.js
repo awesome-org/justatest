@@ -30,7 +30,7 @@ function NounSearchCtrl($scope, $element, $http) {
   };
 
   $scope.handleKeypress = function(key, event) {
-    if (!typeof $scope.selectedGlyphIndex == 'number') return;
+    if (typeof $scope.selectedGlyphIndex == 'undefined') return;
     switch(key) {
       case 13: //enter
         $scope.placeGlyph($scope.glyphs[$scope.selectedGlyphIndex]);
@@ -55,7 +55,7 @@ function NounSearchCtrl($scope, $element, $http) {
       event.preventDefault();
       return false;
     }
-  }
+  };
 
   $scope.placeGlyph = function(glyph) {
     var glyphElement = $(glyph.svg).last()[0]; // using last because some of the NP svg data contains comment and text nodes
@@ -63,11 +63,11 @@ function NounSearchCtrl($scope, $element, $http) {
 
     $('svg#editor').append(glyphElement); // element must be in the DOM for glyphify to set a bounding box
     glyphify(glyphElement).attr('x', cursor.attr('x')).attr('y', cursor.attr('y'));
-  }
+  };
 
-  $scope.resultClicked = function(id) {
-    console.log("CLICK CLICK", $element)
-  }
+  $scope.resultClicked = function($event) {
+    $scope.placeGlyph({svg: $($event.target).closest('svg').clone()});
+  };
 }
 
 function GridCtrl($scope, $element) {

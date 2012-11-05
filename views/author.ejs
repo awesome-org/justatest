@@ -78,7 +78,7 @@
 
         <ol class="found-nouns">
           <li ng-repeat="glyph in glyphs">
-            <div id="glyph-{{glyph.id}}" ng-click="resultClicked()" ng-bind-html-unsafe="glyph.svg" class="glyph-select {{glyph.selectedClass}}"></div>
+            <div id="glyph-{{glyph.id}}" ng-click="resultClicked($event)" ng-bind-html-unsafe="glyph.svg" class="glyph-select {{glyph.selectedClass}}"></div>
           </li>
         </ol>
 

@@ -18,7 +18,7 @@
 <body>
   <div class="container">
     <div class="row">
-      <div class="span10" id="editor-container">
+      <div class="span10" id="editor-container" ng-controller="GridCtrl">
         <svg id="editor" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="95%">
           <defs>
             <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
@@ -57,7 +57,7 @@
 
             <use xlink:href="#bear" x="30" y="60" />
             <use class="brick-wall" xlink:href="#brick-wall" x="30" y="90"/>
-            <use class="player" xlink:href="#player" x="180" y="180" />
+            <use class="player" xlink:href="#player" x="{{player.x}}" y="{{player.y}}" />
             <use class="cursor" xlink:href="#cursor" x="180" y="180" />
             <use class="wall-medium" xlink:href="#wall-medium" x="180" y="180" />
           </g>
@@ -66,24 +66,22 @@
           <strong>Controls: </strong> Press <strong>P</strong> to place the player, <strong>W</strong> to place a wall, and the arrow keys to move.
         </div>
       </div>
-      <div class="span2">
+      <div class="span2" ng-controller="NounSearchCtrl">
         <h2>Glypharo Editor</h2>
 
-        <div ng-controller="NounSearchCtrl">
-          <form name="nounSearch" class="noun-search form-search" ng-submit="submit(nounSearch.query)">
-            <input ng-model="nounSearch.query" type="text" class="input-medium" placeholder="Person, place or thing...">
-            <button type="submit" class="btn">Search</button>
-          </form>
+        <form name="nounSearch" class="noun-search form-search" ng-submit="submit(nounSearch.query)">
+          <input ng-model="nounSearch.query" on-keyup-fn="handleKeypress" type="text" class="noun-search input-medium" placeholder="Person, place or thing...">
+          <button type="submit" class="btn">Search</button>
+        </form>
 
-          <div>{{statusMessage}}</div>
+        <div>{{statusMessage}}</div>
 
-          <ol class="found-nouns">
-            <li ng-repeat="glyph in glyphs">
-              <div ng-bind-html-unsafe="glyph.svg"></div>
-            </li>
-          </ol>
+        <ol class="found-nouns">
+          <li ng-repeat="glyph in glyphs">
+            <div id="glyph-{{glyph.id}}" ng-click="resultClicked()" ng-bind-html-unsafe="glyph.svg" class="glyph-select {{glyph.selectedClass}}"></div>
+          </li>
+        </ol>
 
-        </div>
       </div>
     </div>
   </div>

@@ -10,6 +10,7 @@ $(function() {
 
 function setupInput() {
     $(document).keydown(function(e){
+        if ($(".noun-search").is(":focus")) return; // hack, since stopPropogation() isn't working on the search form
         const keyMappings = {
             37: 'left',
             38: 'up',
@@ -34,13 +35,15 @@ function glyphify(svgObj,backgroundColor,foregroundColor) {
     var largerAxis = boundingRect.width > boundingRect.height ? 'width' : 'height';
     var smallerAxis = largerAxis == 'height' ? 'width' : 'height';
     var largerAxisLength = parseInt(Math.max(1,boundingRect[largerAxis]/boundingRect[smallerAxis])) * gridUnit;
-    $(svgObj).attr(largerAxis, largerAxisLength.toString() + 'px');
-    $(svgObj).attr(smallerAxis, gridUnit.toString() + 'px');
+    var $svgObj = $(svgObj);
+
+    $svgObj.attr(largerAxis, largerAxisLength.toString() + 'px').attr(smallerAxis, gridUnit.toString() + 'px');
+    return $svgObj;
 }
 
 
 // TODO: Remove this. It's just a testing function that exists until glyphify
-// is integrated into the glyph chooser. 
+// is integrated into the glyph chooser.
 function testGlyphify(svgCode) {
     var newTiger = $(svgCode);
     newTiger.attr('x',120);

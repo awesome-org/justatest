@@ -5,3 +5,7 @@
 .found-nouns {
   list-style: none;
 }
+
+.selected {
+  border: 1px solid red;
+}
